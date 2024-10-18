@@ -1,8 +1,9 @@
+CC       = gcc
 NAME     = push_swap
-CFLAGS   = -Wall -Wextra -Werror -g -Ilibft
+CFLAGS   = -g3 -Wall -Wextra -Werror -Ilibft
 LDFLAGS  = -Llibft -lft
-SRCS     = main.c
-OBJS     = $(SRC:.c=.o)
+SRCS     = push_swap.c
+OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft
 LIB_PATH = ./$(LIB_NAME)/$(LIB_NAME).a
 
