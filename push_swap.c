@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/24 17:29:02 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/24 23:09:19 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ int	safe_atoi(int *n, char *str)
 	return (0);
 }
 
+void	free_contents(void *contents)
+{
+	if (contents == NULL)
+		return ;
+	free((t_contents *)contents);
+	contents = NULL;
+}
+
 t_contents	*make_contents(char *str)
 {
 	t_contents	*contents;
@@ -86,13 +94,14 @@ t_contents	*make_contents(char *str)
 t_list	*make_node(t_list *sentinel, char *argv)
 {
 	t_list		*new_node;
+	t_contents	*new_contents;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_contents = make_contents(argv);
+	if (new_contents == NULL)
+		return (NULL);
+	new_node = ft_lstnew(new_contents);
 	if (new_node == NULL)
-		return (NULL);
-	new_node->content = make_contents(argv);
-	if (new_node->content == NULL)
-		return (NULL);
+		return (free_contents(new_contents), NULL);
 	new_node->prev = sentinel->prev;
 	new_node->next = sentinel;
 	return (new_node);
@@ -110,7 +119,7 @@ void	init_stack_a(t_list *stack_a, int argc, char *argv[])
 		stack_a->next = make_node(sentinel, argv[i]);
 		if (stack_a->next == NULL)
 		{
-			ft_lstclear(&sentinel, &free);
+			ft_lstclear(&sentinel, &free_contents);
 			die("malloc error");
 		}
 		stack_a = stack_a->next;
@@ -149,6 +158,8 @@ int	main(int argc, char *argv[])
 		current = current->next;
 	}
 	print_lst("stack_a", current);
+	ft_lstclear(&stack_a, &free_contents);
+	free(stack_b);
 	return (0);
 }
 
