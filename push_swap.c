@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/24 23:09:19 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/24 23:27:45 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_list	*make_node(t_list *sentinel, char *argv)
 	return (new_node);
 }
 
-void	init_stack_a(t_list *stack_a, int argc, char *argv[])
+int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
 	t_list	*sentinel;
 	size_t	i;
@@ -118,14 +118,12 @@ void	init_stack_a(t_list *stack_a, int argc, char *argv[])
 	{
 		stack_a->next = make_node(sentinel, argv[i]);
 		if (stack_a->next == NULL)
-		{
-			ft_lstclear(&sentinel, &free_contents);
-			die("malloc error");
-		}
+			return (ft_lstclear(&sentinel, &free_contents), 1);
 		stack_a = stack_a->next;
 		sentinel->prev = stack_a;
 		i++;
 	}
+	return (0);
 }
 
 void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
@@ -136,7 +134,8 @@ void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
 	(*stack_a)->content = NULL;
 	(*stack_a)->prev = *stack_a;
 	(*stack_a)->next = *stack_a;
-	init_stack_a(*stack_a, argc, argv);
+	if (init_stack_a(*stack_a, argc, argv))
+		die("Error");
 	*stack_b = (t_list *)malloc(sizeof(t_list));
 	(*stack_b)->content = NULL;
 	(*stack_b)->prev = *stack_b;
