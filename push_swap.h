@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/22 20:28:28 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:27:45 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ typedef struct s_contents
 }				t_contents;
 
 void	die(char *cause);
+
+void	print_lst(char const *str, t_list *lst);
 
 #endif

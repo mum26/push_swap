@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/22 21:42:18 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:29:02 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ char	*ulong_to_ternary(char *ternary, unsigned long ul)
 	int		len;
 	size_t	base_len;
 
-	ft_memset(ternary, '-', INT_TERNARY_MAX_LEN - 1);
 	len = INT_TERNARY_MAX_LEN - 1;
 	ternary[len--] = '\0';
-	if (ul == 0)
-		return (ternary);
 	base_len = ft_strlen(TER_DIGITS);
 	while (0 <= len)
 	{
@@ -54,17 +51,19 @@ int	safe_atoi(int *n, char *str)
 {
 	int			sign;
 	long long	lln;
+	char		*s;
 
-	str = parse_sign(str, &sign);
+	s = str;
+	s = parse_sign(s, &sign);
 	lln = 0;
-	while (ft_isdigit(*str))
+	while (ft_isdigit(*s))
 	{
-		lln = lln * 10 + (*str - '0');
-		str++;
-		if (ft_isdigit(*str) && sign == 1 && ((INT_MAX - (*str - '0'))
+		lln = lln * 10 + (*s - '0');
+		s++;
+		if (ft_isdigit(*s) && sign == 1 && ((INT_MAX - (*s - '0'))
 				/ 10 < lln || lln * 10 >= INT_MAX))
 			return (1);
-		if (ft_isdigit(*str) && sign == -1 && ((INT_MIN + (*str - '0'))
+		if (ft_isdigit(*s) && sign == -1 && ((INT_MIN + (*s - '0'))
 				/ 10 > -lln || lln * 10 < INT_MIN))
 			return (1);
 	}
@@ -72,23 +71,30 @@ int	safe_atoi(int *n, char *str)
 	return (0);
 }
 
-//t_contents	*make_contents(a)
+t_contents	*make_contents(char *str)
+{
+	t_contents	*contents;
+	contents = (t_contents *)malloc(sizeof(t_contents));
+	if (contents == NULL)
+		return (NULL);
+	contents->str = str;
+	if (safe_atoi(&contents->num, str))
+		return (free(contents), NULL);
+	return (contents);
+}
 
-t_list	*make_node(char	*argv)
+t_list	*make_node(t_list *sentinel, char *argv)
 {
 	t_list		*new_node;
-	t_contents	*new_contents;
 
 	new_node = (t_list *)malloc(sizeof(t_list));
 	if (new_node == NULL)
 		return (NULL);
-	new_contents = (t_contents *)malloc(sizeof(t_contents));
-	if (new_contents == NULL)
+	new_node->content = make_contents(argv);
+	if (new_node->content == NULL)
 		return (NULL);
-	new_contents->str = argv;
-	if (safe_atoi(&new_contents->num, argv))
-		return (NULL);
-	new_node->content = new_contents;
+	new_node->prev = sentinel->prev;
+	new_node->next = sentinel;
 	return (new_node);
 }
 
@@ -101,42 +107,48 @@ void	init_stack_a(t_list *stack_a, int argc, char *argv[])
 	i = 0;
 	while (i < (size_t)argc - 1)
 	{
-		stack_a->next = make_node(argv[i]);
+		stack_a->next = make_node(sentinel, argv[i]);
 		if (stack_a->next == NULL)
 		{
 			ft_lstclear(&sentinel, &free);
 			die("malloc error");
 		}
-		stack_a->next->prev = stack_a;
 		stack_a = stack_a->next;
+		sentinel->prev = stack_a;
 		i++;
 	}
 }
 
-void	init_stacks(t_list *stack_a, t_list *stack_b, int argc, char *argv[])
+void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
 {
-	stack_a->content = NULL;
-	stack_a->prev = stack_a;
-	stack_a->next = stack_a;
-	init_stack_a(stack_a, argc, argv);
-	stack_b->content = NULL;
-	stack_b->prev = stack_b;
-	stack_b->next = stack_b;
+	*stack_a = (t_list *)malloc(sizeof(t_list));
+	if (*stack_a == NULL)
+		return ;
+	(*stack_a)->content = NULL;
+	(*stack_a)->prev = *stack_a;
+	(*stack_a)->next = *stack_a;
+	init_stack_a(*stack_a, argc, argv);
+	*stack_b = (t_list *)malloc(sizeof(t_list));
+	(*stack_b)->content = NULL;
+	(*stack_b)->prev = *stack_b;
+	(*stack_b)->next = *stack_b;
 }
 
-void	print_lst(char const *str, t_list *lst)
+int	main(int argc, char *argv[])
 {
-	printf("[%s] content: %p, current: %p, prev: %p, next: %p\n", \
-			str, lst->content, lst, lst->prev, lst->next);
-}
+	t_list	*stack_a;
+	t_list	*stack_b;
+	t_list	*current;
 
-int	main(void)
-//int	main(int argc, char *argv[])
-{
-	t_list	*node;
-
-	node = make_node("1234567890");
-	print_lst("node", node);
+	init_stacks(&stack_a, &stack_b, argc, argv + 1);
+	print_lst("stack_a", stack_a);
+	current = stack_a->next;
+	while (current->content != NULL)
+	{
+		print_lst("stack_a", current);
+		current = current->next;
+	}
+	print_lst("stack_a", current);
 	return (0);
 }
 
