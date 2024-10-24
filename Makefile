@@ -3,7 +3,8 @@ NAME     = push_swap
 CFLAGS   = -g3 -Wall -Wextra -Werror -Ilibft
 LDFLAGS  = -Llibft -lft
 SRCS     = push_swap.c \
-			die.c
+			die.c \
+			print.c
 OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft
 LIB_PATH = ./$(LIB_NAME)/$(LIB_NAME).a
