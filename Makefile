@@ -3,6 +3,9 @@ NAME     = push_swap
 CFLAGS   = -g3 -Wall -Wextra -Werror -Ilibft
 LDFLAGS  = -Llibft -lft
 SRCS     = push_swap.c \
+			lst.c \
+			contents.c \
+			util.c \
 			die.c \
 			print.c
 OBJS     = $(SRCS:.c=.o)
