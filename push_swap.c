@@ -6,17 +6,27 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/24 23:27:45 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/25 18:32:34 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+unsigned long mapping(int n, int offset)
+{
+	unsigned long	ul;
+
+	ul = (unsigned long)(n + offset);
+	return (ul);
+}
 
 char	*ulong_to_ternary(char *ternary, unsigned long ul)
 {
 	int		len;
 	size_t	base_len;
 
+	if (ternary == NULL)
+		return (NULL);
 	len = INT_TERNARY_MAX_LEN - 1;
 	ternary[len--] = '\0';
 	base_len = ft_strlen(TER_DIGITS);
@@ -33,8 +43,28 @@ char	*ulong_to_ternary(char *ternary, unsigned long ul)
 	return (ternary);
 }
 
+void	lstiter_num_to_ternary(t_list *lst, int offset)
+{
+	t_contents *contents;
+
+	contents = NULL;
+	if (lst->content == NULL)
+		lst = lst->next;
+	while (lst)
+	{
+		if (lst->content == NULL)
+			break ;
+		contents = (t_contents *)lst->content;
+		contents->map = mapping(contents->num, offset);
+		ulong_to_ternary(contents->ternary, contents->map);
+		lst = lst->next;
+	}
+}
+
 char	*parse_sign(char *str, int *sign)
 {
+	if (str == NULL || sign == NULL)
+		return (NULL);
 	while (ft_isspace(*str))
 		str++;
 	*sign = 1;
@@ -53,22 +83,27 @@ int	safe_atoi(int *n, char *str)
 	long long	lln;
 	char		*s;
 
-	s = str;
-	s = parse_sign(s, &sign);
+	if (n == NULL || str == NULL)
+		return (FUNC_FAILUER);
+	s = parse_sign(str, &sign);
+	if (*s == '\0')
+		return (FUNC_FAILUER);
 	lln = 0;
-	while (ft_isdigit(*s))
+	while (*s)
 	{
+		if (!ft_isdigit(*s))
+			return (FUNC_FAILUER);
 		lln = lln * 10 + (*s - '0');
 		s++;
 		if (ft_isdigit(*s) && sign == 1 && ((INT_MAX - (*s - '0'))
 				/ 10 < lln || lln * 10 >= INT_MAX))
-			return (1);
+			return (FUNC_FAILUER);
 		if (ft_isdigit(*s) && sign == -1 && ((INT_MIN + (*s - '0'))
 				/ 10 > -lln || lln * 10 < INT_MIN))
-			return (1);
+			return (FUNC_FAILUER);
 	}
 	*n = sign * (int)lln;
-	return (0);
+	return (FUNC_SUCCESS);
 }
 
 void	free_contents(void *contents)
@@ -81,6 +116,8 @@ void	free_contents(void *contents)
 
 t_contents	*make_contents(char *str)
 {
+	if (str == NULL)
+		return (NULL);
 	t_contents	*contents;
 	contents = (t_contents *)malloc(sizeof(t_contents));
 	if (contents == NULL)
@@ -96,6 +133,8 @@ t_list	*make_node(t_list *sentinel, char *argv)
 	t_list		*new_node;
 	t_contents	*new_contents;
 
+	if (sentinel == NULL || argv == NULL)
+		return (NULL);
 	new_contents = make_contents(argv);
 	if (new_contents == NULL)
 		return (NULL);
@@ -109,25 +148,45 @@ t_list	*make_node(t_list *sentinel, char *argv)
 
 int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
-	t_list	*sentinel;
-	size_t	i;
+	t_list			*sentinel;
+	unsigned int	offset;
+	unsigned int	min;
+	size_t			i;
 
+	if (stack_a == NULL || argv == NULL)
+		return (FUNC_FAILUER);
 	sentinel = stack_a;
+	offset = 0;
+	min = 0;
 	i = 0;
 	while (i < (size_t)argc - 1)
 	{
 		stack_a->next = make_node(sentinel, argv[i]);
 		if (stack_a->next == NULL)
-			return (ft_lstclear(&sentinel, &free_contents), 1);
+		{
+			stack_a->next = sentinel;
+			sentinel->prev = stack_a;
+			return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
+		}
 		stack_a = stack_a->next;
 		sentinel->prev = stack_a;
+		if (((t_contents *)stack_a->content)->num < 0)
+			offset = ((t_contents *)stack_a->content)->num * -1;
+		else
+			offset = ((t_contents *)stack_a->content)->num;
+		if (min < offset)
+			min = offset;
 		i++;
 	}
-	return (0);
+	printf("%u\n", min);
+	lstiter_num_to_ternary(sentinel, min);
+	return (FUNC_SUCCESS);
 }
 
 void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
 {
+	if (stack_a == NULL || stack_b == NULL || argv == NULL)
+		die("Error");
 	*stack_a = (t_list *)malloc(sizeof(t_list));
 	if (*stack_a == NULL)
 		return ;
