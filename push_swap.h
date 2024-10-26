@@ -58,5 +58,6 @@ void	die(char *cause);
 
 /* print */
 void	print_lst(char const *str, t_list *lst);
+void	print_content(char const *str, t_list *lst);
 
 #endif

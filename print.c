@@ -12,20 +12,13 @@
 
 #include "push_swap.h"
 
-//void	print_lst(char const *str, t_list *lst)
-//{
-//	t_contents *c;
-//
-//	printf("[%s] content: %15p, current: %15p, prev: %15p, next: %15p\n", 
-//			str, lst->content, lst, lst->prev, lst->next);
-//	c = (t_contents *)lst->content;
-//	if (c == NULL)
-//		return ;
-//	printf("\t[content] argv: %22s, num: %22d, map: %22u, ternary: %22s\n",
-//			c->str, c->num, c->map, c->ternary);
-//}
-
 void	print_lst(char const *str, t_list *lst)
+{
+	printf("[%s] content: %15p, prev: %15p, current: %15p, next: %15p\n", 
+			str, lst->content, lst, lst->prev, lst->next);
+}
+
+void	print_content(char const *str, t_list *lst)
 {
 	t_contents *c;
 

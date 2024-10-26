@@ -30,10 +30,27 @@ t_list	*make_node(t_list *sentinel, char *argv)
 	return (new_node);
 }
 
+int	fail_init_stack_a(t_list *sentinel, t_list *stack_a)
+{
+	stack_a->next = sentinel;
+	sentinel->prev = stack_a;
+	ft_lstclear(&sentinel, &free_contents);
+	return (FUNC_FAILUER);
+}
+
+void	set_offset(int num, unsigned int *min)
+{
+	unsigned int	temp;
+
+	if (num < 0)
+		temp = num * -1;
+	if (min < temp)
+		min = temp;
+}
+
 int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
 	t_list			*sentinel;
-	unsigned int	offset;
 	unsigned int	min;
 	size_t			i;
 
@@ -45,23 +62,13 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 	i = 0;
 	while (i < (size_t)argc - 1)
 	{
-		stack_a->next = make_node(sentinel, argv[i]);
+		stack_a->next = make_node(sentinel, argv[i++]);
 		if (stack_a->next == NULL)
-		{
-			stack_a->next = sentinel;
-			sentinel->prev = stack_a;
-			return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
-		}
+			return (fail_init_stack_a(sentinel, stack_a));
 		stack_a = stack_a->next;
 		sentinel->prev = stack_a;
-		if (((t_contents *)stack_a->content)->num < 0)
-			offset = ((t_contents *)stack_a->content)->num * -1;
-		if (min < offset)
-			min = offset;
-		printf("%u\n", min);
-		i++;
+		set_min(((t_contents *)stack_a->content)->num, &min);
 	}
-	printf("%u\n", min);
 	lstiter_num_to_ternary(sentinel, min);
 	return (FUNC_SUCCESS);
 }
@@ -83,5 +90,3 @@ void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
 	(*stack_b)->prev = *stack_b;
 	(*stack_b)->next = *stack_b;
 }
-
-
