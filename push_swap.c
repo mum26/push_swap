@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	make_sentinel(t_list **lst)
+int	make_lst(t_list **lst)
 {
 	if (lst == NULL)
 		return (FUNC_FAILUER);
@@ -29,7 +29,7 @@ void	make_stack_a(t_list **stack_a, int argc, char *argv[])
 {
 	if (stack_a == NULL)
 		die("Error");
-	if (make_sentinel(stack_a))
+	if (make_lst(stack_a))
 		die("Error");
 	if (init_stack_a(*stack_a, argc, argv))
 		die("Error");

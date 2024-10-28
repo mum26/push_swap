@@ -30,13 +30,14 @@ typedef struct s_contents
 }				t_contents;
 
 /* push_swap */
-t_list			*make_stack_a(t_list **stack_a, int argc, char *argv[]);
+t_list			*make_stacks(t_list **stack_a, int argc, char *argv[]);
 //int				exec_sort(t_list **stack_a, t_list **stack_b);
 //int				cleaning_up(t_list **stack_a, t_list **stack_b);
 
 /* lst */
+int				make_lst(t_list **lst);
 t_list			*make_node(t_list *sentinel, char *argv);
-int				init_stack_a(t_list *stack_a, int argc, char *argv[]);
+int				make_stack_a(t_list *stack_a, int argc, char *argv[]);
 void			init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[]);
 
 /* contents */
@@ -58,6 +59,5 @@ void	die(char *cause);
 
 /* print */
 void	print_lst(char const *str, t_list *lst);
-void	print_content(char const *str, t_list *lst);
 
 #endif
