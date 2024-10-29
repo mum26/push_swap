@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:45:37 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 17:09:23 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 17:58:12 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	is_duplicate(int n, t_list *sentinel)
 		if (current->content == NULL)
 			break ;
 		if (((t_contents *)current->content)->num == n)
-			return (printf("%d\n", n), FUNC_FAILUER);
+			return (FUNC_FAILUER);
 		current = current->next;
 	}
 	return (FUNC_SUCCESS);

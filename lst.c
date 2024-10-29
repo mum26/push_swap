@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 17:07:54 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 18:02:36 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,25 @@ int	fail_init_stack_a(t_list *sentinel, t_list *stack_a)
 	return (FUNC_FAILUER);
 }
 
+int	is_sorted(t_list *sentinel)
+{
+	t_list	*current;
+
+	if (sentinel == NULL)
+		return (FUNC_FAILUER);
+	current = sentinel->next;
+	while(current)
+	{
+		if (current->next->content == NULL)
+			break ;
+		if (((t_contents *)current->content)->num
+				> ((t_contents *)current->next->content)->num)
+			return (FUNC_SUCCESS);
+		current = current->next;
+	}
+	return (FUNC_FAILUER);
+}
+
 int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
 	t_list			*sentinel;
@@ -107,6 +126,8 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 		sentinel->prev = stack_a;
 		set_min(((t_contents *)stack_a->content)->num, &min);
 	}
+	if (is_sorted(sentinel))
+		return (FUNC_FAILUER);
 	lstiter_num_to_ternary(sentinel, min);
 	return (FUNC_SUCCESS);
 }
