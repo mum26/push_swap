@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 20:03:01 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 20:32:43 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ int				str_token(char ***dst, char const *str, char c);
 
 /* die */
 void	die(char *cause);
+
+/* die */
+void	swap_a(t_list **stack_a);
+void	swap_b(t_list **stack_b);
+void	sa_and_sb(t_list **stack_a, t_list **stack_b);
 
 /* print */
 void	print_lst(char const *str, t_list *lst);

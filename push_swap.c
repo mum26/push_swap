@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/28 20:47:08 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 20:40:55 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 int	main(int argc, char *argv[])
 {
 	t_list	*stack_a;
+	t_list	*stack_b;
 	t_list	*current;
+	char **a = argv + 1;
+	char **b = argv + 1;
 
-	make_stack_a(&stack_a, argc, argv + 1);
+	make_stack_a(&stack_a, argc, a);
+	make_stack_a(&stack_b, argc, b);
+	sa_and_sb(&stack_a->next, &stack_b->next);
+
 	print_lst("stack_a", stack_a);
 	current = stack_a->next;
 	while (current->content != NULL)
@@ -27,6 +33,17 @@ int	main(int argc, char *argv[])
 	}
 	print_lst("stack_a", current);
 	ft_lstclear(&stack_a, &free_contents);
-	return (0);
+
+	print_lst("stack_b", stack_b);
+	current = stack_b->next;
+	while (current->content != NULL)
+	{
+		print_content("stack_b", current);
+		current = current->next;
+	}
+	print_lst("stack_b", current);
+	ft_lstclear(&stack_b, &free_contents);
+
+return (0);
 }
 
