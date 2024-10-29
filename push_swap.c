@@ -18,11 +18,17 @@ int	main(int argc, char *argv[])
 	t_list	*stack_b;
 	t_list	*current;
 	char **a = argv + 1;
-	char **b = argv + 1;
 
 	make_stack_a(&stack_a, argc, a);
-	make_stack_a(&stack_b, argc, b);
-	sa_and_sb(&stack_a->next, &stack_b->next);
+	make_lst(&stack_b);
+
+	push_a(&stack_a, &stack_b);
+	push_a(&stack_a, &stack_b);
+	push_a(&stack_a, &stack_b);
+	push_b(&stack_b, &stack_a);
+	push_b(&stack_b, &stack_a);
+	push_b(&stack_b, &stack_a);
+
 
 	print_lst("stack_a", stack_a);
 	current = stack_a->next;

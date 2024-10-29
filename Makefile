@@ -9,7 +9,8 @@ SRCS     = push_swap.c \
 			die.c \
 			str_token.c \
 			print.c \
-			swap.c
+			swap.c \
+			push.c
 OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft
 LIB_PATH = ./$(LIB_NAME)/$(LIB_NAME).a
