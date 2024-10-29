@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:45:37 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 17:58:12 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 19:24:23 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int	is_duplicate(int n, t_list *sentinel)
 
 t_contents	*make_contents(char *str, t_list *sentinel)
 {
-	int	temp;
+	int			temp;
+	t_contents	*contents;
+
 	if (str == NULL)
 		return (NULL);
-	t_contents	*contents;
 	contents = (t_contents *)malloc(sizeof(t_contents));
 	if (contents == NULL)
 		return (NULL);

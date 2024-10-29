@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:17:44 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/25 19:28:13 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 18:29:52 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	print_content(char const *str, t_list *lst)
 		printf("[%s] sentinel\n", str);
 		return ;
 	}
-	printf("[content] argv: %11s, num: %11d, map: %11u, ternary: %s\n",
-			c->str, c->num, c->map, c->ternary);
+	printf("[content] num: %11d, map: %11u, ternary: %s\n",
+			c->num, c->map, c->ternary);
 }

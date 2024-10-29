@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 18:02:36 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 19:57:44 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,31 @@ int	is_split(char *argv)
 	if (words <= 1)
 		return (0);
 	return (words);
-
 }
 
 void	make_stack_a(t_list **stack_a, int argc, char *argv[])
 {
-//	char	**strv;
+	char	**strv;
 
-//	strv = argv;
+	strv = argv;
 	if (stack_a == NULL)
 		die("Error");
 	if (make_lst(stack_a))
 		die("Error");
 	if (argc == 2 && is_split(argv[0]))
 	{
-//		argc = str_token(&strv, argv[0], ' ');
-		argc = str_token(&argv, argv[0], ' ');
+		argc = str_token(&strv, argv[0], ' ');
 		if (argv == NULL)
 			die("Error");
 	}
-//	if (init_stack_a(*stack_a, argc, strv))
-	if (init_stack_a(*stack_a, argc, argv))
+	if (init_stack_a(*stack_a, argc, strv))
+	{
+		if (argv != strv)
+			cleanup(strv);
 		die("Error");
-//	if (argv != strv)
-//		cleanup(strv);
+	}
+	if (argv != strv)
+		cleanup(strv);
 }
 
 t_list	*make_node(t_list *sentinel, char *argv)
@@ -96,7 +97,7 @@ int	is_sorted(t_list *sentinel)
 	current = sentinel->next;
 	while(current)
 	{
-		if (current->next->content == NULL)
+		if (current->next == NULL || current->next->content == NULL)
 			break ;
 		if (((t_contents *)current->content)->num
 				> ((t_contents *)current->next->content)->num)
@@ -127,25 +128,8 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 		set_min(((t_contents *)stack_a->content)->num, &min);
 	}
 	if (is_sorted(sentinel))
-		return (FUNC_FAILUER);
+		return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
 	lstiter_num_to_ternary(sentinel, min);
 	return (FUNC_SUCCESS);
 }
 
-//void	init_stacks(t_list **stack_a, t_list **stack_b, int argc, char *argv[])
-//{
-//	if (stack_a == NULL || stack_b == NULL || argv == NULL)
-//		die("Error");
-//	*stack_a = (t_list *)malloc(sizeof(t_list));
-//	if (*stack_a == NULL)
-//		return ;
-//	(*stack_a)->content = NULL;
-//	(*stack_a)->prev = *stack_a;
-//	(*stack_a)->next = *stack_a;
-//	if (init_stack_a(*stack_a, argc, argv))
-//		die("Error");
-//	*stack_b = (t_list *)malloc(sizeof(t_list));
-//	(*stack_b)->content = NULL;
-//	(*stack_b)->prev = *stack_b;
-//	(*stack_b)->next = *stack_b;
-//}

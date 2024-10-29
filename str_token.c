@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:49:49 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 15:15:18 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/29 19:55:35 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	str_token(char ***dst, char const *s, char c)
 	if (s == NULL || dst == NULL)
 		return (-1);
 	words = count_words(s, c);
-	if (0 == words)
+	if (words == 0)
 		return (0);
 	*dst = (char **)malloc(sizeof(char *) * (words + 1));
 	if (*dst == NULL)
