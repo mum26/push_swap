@@ -7,6 +7,7 @@ SRCS     = push_swap.c \
 			contents.c \
 			util.c \
 			die.c \
+			str_token.c \
 			print.c
 OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft

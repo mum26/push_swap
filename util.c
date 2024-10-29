@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:35:05 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/25 21:59:20 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/28 18:01:17 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,13 @@ int	safe_atoi(int *n, char *str)
 	return (FUNC_SUCCESS);
 }
 
+void	set_min(int num, unsigned int *min)
+{
+	unsigned int	temp;
+
+	temp = 0;
+	if (num < 0)
+		temp = num * -1;
+	if (*min < temp)
+		*min = temp;
+}
