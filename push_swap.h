@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 20:32:43 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/30 21:02:01 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 
 # define FUNC_SUCCESS 0
 # define FUNC_FAILUER 1
+
+# define L 0
+# define R 1
+# define LR 2
+
+# define P 0
+# define C 1
+# define N 2
+# define PCN 3
 
 # include "libft/libft.h"
 
@@ -62,6 +71,7 @@ int				str_token(char ***dst, char const *str, char c);
 void	die(char *cause);
 
 /* swap */
+void	swap_content(t_list *a, t_list *b, char *str);
 void	swap_a(t_list **stack_a);
 void	swap_b(t_list **stack_b);
 void	sa_and_sb(t_list **stack_a, t_list **stack_b);
@@ -70,6 +80,15 @@ void	sa_and_sb(t_list **stack_a, t_list **stack_b);
 void	push_a(t_list **stack_a, t_list **stack_b);
 void	push_b(t_list **stack_b, t_list **stack_a);
 
+/* rotate */
+void	rotate_a(t_list **stack_a);
+void	rotate_b(t_list **stack_b);
+void	ra_and_rb(t_list **stack_a, t_list **stack_b);
+
+/* reverse rotate */
+void	reverse_rotate_a(t_list **stack_a);
+void	reverse_rotate_b(t_list **stack_b);
+void	rra_and_rrb(t_list **stack_a, t_list **stack_b);
 
 /* print */
 void	print_lst(char const *str, t_list *lst);

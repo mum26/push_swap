@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 20:40:55 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/30 21:02:53 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@ int	main(int argc, char *argv[])
 	make_stack_a(&stack_a, argc, a);
 	make_lst(&stack_b);
 
-	push_a(&stack_a, &stack_b);
-	push_a(&stack_a, &stack_b);
-	push_a(&stack_a, &stack_b);
-	push_b(&stack_b, &stack_a);
-	push_b(&stack_b, &stack_a);
-	push_b(&stack_b, &stack_a);
-
+	reverse_rotate_a(&stack_a);
 
 	print_lst("stack_a", stack_a);
 	current = stack_a->next;
@@ -50,6 +44,6 @@ int	main(int argc, char *argv[])
 	print_lst("stack_b", current);
 	ft_lstclear(&stack_b, &free_contents);
 
-return (0);
+	return (0);
 }
 

@@ -10,7 +10,9 @@ SRCS     = push_swap.c \
 			str_token.c \
 			print.c \
 			swap.c \
-			push.c
+			push.c \
+			rotate.c \
+			reverse_rotate.c
 OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft
 LIB_PATH = ./$(LIB_NAME)/$(LIB_NAME).a
