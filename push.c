@@ -1,27 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 20:04:01 by sishige           #+#    #+#             */
+/*   Updated: 2024/10/30 20:04:06 by sishige          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "push_swap.h"
 
-void	push(t_list **lst_a, t_list **lst_b, char *str)
+static void	push_left_to_right(t_list **left, t_list **right, char *str)
 {
-	t_list	*sentinel_a;
-	t_list	*sentinel_b;
-	t_list	*head_a;
-	t_list	*head_b;
-	t_list	*next_a;
+	t_list	*lst[LR];
+	t_list	*head[LR];
 
-	sentinel_a = *lst_a;
-	sentinel_b = *lst_b;
-	head_a = sentinel_a->next;
-	head_b = sentinel_b->next;
-	next_a = head_a->next;
+	lst[L] = *left;
+	lst[R] = *right;
+	if (lst[L] == lst[L]->next)
+		return ;
+	head[L] = lst[L]->next;
+	head[R] = lst[R]->next;
 
-	sentinel_a->next = next_a;
-	next_a->prev = sentinel_a;
+	lst[L]->next = head[L]->next;
+	head[L]->next->prev = lst[L];
 
-	sentinel_b->next = head_a;
-	head_a->prev = sentinel_b;
-	head_a->next = head_b;
-	head_b->prev = head_a;
+	lst[R]->next = head[L];
+	head[L]->prev = lst[R];
+	head[L]->next = head[R];
+	head[R]->prev = head[L];
 
 	if (str)
 		ft_printf("%s\n", str);
@@ -29,10 +39,10 @@ void	push(t_list **lst_a, t_list **lst_b, char *str)
 
 void	push_a(t_list **stack_a, t_list **stack_b)
 {
-	push(stack_a, stack_b, "pa");
+	push_left_to_right(stack_a, stack_b, "pa");
 }
 
 void	push_b(t_list **stack_b, t_list **stack_a)
 {
-	push(stack_b, stack_a, "pb");
+	push_left_to_right(stack_b, stack_a, "pb");
 }
