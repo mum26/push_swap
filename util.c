@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:35:05 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/28 18:01:17 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/30 21:54:59 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,26 @@ unsigned int mapping(int n, int offset)
 
 	un = (unsigned int)(n + offset);
 	return (un);
+}
+
+void	test(t_list *lst)
+{
+	t_list		*current;
+	t_contents	*min;
+
+	min = (t_list *)lst->content;
+	current = lst;
+	while (current)
+	{
+		if (current->content == NULL)
+			return ;
+		if (min->num < ((t_list *)current->content)->num)
+		{
+			((t_list *)current->content)->map = min->num + 1;
+			return ;
+		}
+		current = current->next;
+	}
 }
 
 char	*ulong_to_ternary(char *ternary, unsigned long ul)
