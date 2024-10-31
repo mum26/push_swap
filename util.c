@@ -20,25 +20,25 @@ unsigned int mapping(int n, int offset)
 	return (un);
 }
 
-void	test(t_list *lst)
-{
-	t_list		*current;
-	t_contents	*min;
-
-	min = (t_list *)lst->content;
-	current = lst;
-	while (current)
-	{
-		if (current->content == NULL)
-			return ;
-		if (min->num < ((t_list *)current->content)->num)
-		{
-			((t_list *)current->content)->map = min->num + 1;
-			return ;
-		}
-		current = current->next;
-	}
-}
+//void	test(t_list *lst)
+//{
+//	t_list		*current;
+//	t_contents	*min;
+//
+//	min = (t_list *)lst->content;
+//	current = lst;
+//	while (current)
+//	{
+//		if (current->content == NULL)
+//			return ;
+//		if (min->num < ((t_list *)current->content)->num)
+//		{
+//			((t_list *)current->content)->map = min->num + 1;
+//			return ;
+//		}
+//		current = current->next;
+//	}
+//}
 
 char	*ulong_to_ternary(char *ternary, unsigned long ul)
 {

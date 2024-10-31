@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	make_stack_a(&stack_a, argc, a);
 	make_lst(&stack_b);
 
-	reverse_rotate_a(&stack_a);
+//	reverse_rotate_a(&stack_a);
 
 	print_lst("stack_a", stack_a);
 	current = stack_a->next;

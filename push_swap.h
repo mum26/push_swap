@@ -35,7 +35,8 @@ typedef struct s_contents
 	char			*str;
 	int				num;
 	unsigned int	map;
-	char			ternary[INT_TERNARY_MAX_LEN];
+//	char			ternary[INT_TERNARY_MAX_LEN];
+	char			*ternary;
 }				t_contents;
 
 /* push_swap */
@@ -52,7 +53,7 @@ int				init_stack_a(t_list *stack_a, int argc, char *argv[]);
 int	is_split(char *argv);
 
 /* contents */
-int				lstiter_num_to_ternary(t_list *lst, int offset);
+int				lstiter_num_to_ternary(t_list *lst, int argc);
 void			free_contents(void *contents);
 t_contents		*make_contents(char *str, t_list *sentinel);
 
