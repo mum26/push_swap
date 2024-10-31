@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/30 21:02:01 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/31 17:54:24 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_contents
 	char			*str;
 	int				num;
 	unsigned int	map;
-//	char			ternary[INT_TERNARY_MAX_LEN];
 	char			*ternary;
 }				t_contents;
 
@@ -53,7 +52,7 @@ int				init_stack_a(t_list *stack_a, int argc, char *argv[]);
 int	is_split(char *argv);
 
 /* contents */
-int				lstiter_num_to_ternary(t_list *lst, int argc);
+int				lstiter_num_to_ternary(t_list *lst);
 void			free_contents(void *contents);
 t_contents		*make_contents(char *str, t_list *sentinel);
 

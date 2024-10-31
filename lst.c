@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 19:57:44 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/31 17:55:13 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_list	*make_node(t_list *sentinel, char *argv)
 	new_node = ft_lstnew(new_contents);
 	if (new_node == NULL)
 		return (free_contents(new_contents), NULL);
-	print_content("debug", new_node);
 	new_node->prev = sentinel->prev;
 	new_node->next = sentinel;
 	return (new_node);
@@ -130,7 +129,7 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 	}
 	if (is_sorted(sentinel))
 		return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
-	lstiter_num_to_ternary(sentinel, argc - 1);
+	lstiter_num_to_ternary(sentinel);
 	return (FUNC_SUCCESS);
 }
 

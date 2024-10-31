@@ -6,41 +6,36 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:45:37 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/29 19:24:23 by sishige          ###   ########.fr       */
+/*   Updated: 2024/10/31 21:02:33 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	lstiter_num_to_ternary(t_list *lst, int argc)
+int	lstiter_num_to_ternary(t_list *stack_a)
 {
-	t_contents	*max;
-	t_list *a = lst;
+	t_list	*current;
+	t_list	*lst;
+	size_t	cnt;
 
-	if (lst == NULL)
+	if (stack_a == NULL)
 		return (FUNC_FAILUER);
-	if (lst->content == NULL)
-		lst = lst->next;
-	int i = 0;
-	int argcc = argc;
-	while (i < argcc)
+	if (stack_a->content == NULL)
+		stack_a = stack_a->next;
+	current = stack_a;
+	while (current->content)
 	{
-//		if (lst->content == NULL)
-//			break ;
-		max = (t_contents *)lst->content;
-		a = lst;
-		while (a)
+		lst = stack_a;
+		cnt = 0;
+		while (lst->content)
 		{
-			if (a->content == NULL)
-				break ;
-			if (max->num < ((t_contents *)a->content)->num
-					&& ((t_contents *)a->content)->ternary == NULL)
-				max = (t_contents *)a->content;
-			a = a->next;
+			if (((t_contents *)lst->content)->num < ((t_contents *)current->content)->num)
+				cnt++;
+			lst = lst->next;
 		}
-		max->map = argc--;
-		max->ternary = ft_ulltoa_base(max->map, TER_DIGITS);
-		i++;
+		((t_contents *)current->content)->map = cnt;
+		((t_contents *)current->content)->ternary = ft_ulltoa_base(cnt, TER_DIGITS);
+		current = current->next;
 	}
 	return (FUNC_SUCCESS);
 }
