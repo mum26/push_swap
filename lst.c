@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/31 17:55:13 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/01 17:59:28 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ int	make_lst(t_list **lst)
 	return (FUNC_SUCCESS);
 }
 
-int	is_split(char *argv)
-{
-	size_t words;
-	char	*p;
-
-	p = argv;
-	words = count_words(p, ' ');
-	if (words <= 1)
-		return (0);
-	return (words);
-}
-
 void	make_stack_a(t_list **stack_a, int argc, char *argv[])
 {
 	char	**strv;
@@ -46,7 +34,7 @@ void	make_stack_a(t_list **stack_a, int argc, char *argv[])
 		die("Error");
 	if (make_lst(stack_a))
 		die("Error");
-	if (argc == 2 && is_split(argv[0]))
+	if (argc == 2 && is_quoting(argv[0]))
 	{
 		argc = str_token(&strv, argv[0], ' ');
 		if (argv == NULL)
@@ -85,38 +73,17 @@ int	fail_init_stack_a(t_list *sentinel, t_list *stack_a)
 	stack_a->next = sentinel;
 	sentinel->prev = stack_a;
 	ft_lstclear(&sentinel, &free_contents);
-	return (FUNC_FAILUER);
-}
-
-int	is_sorted(t_list *sentinel)
-{
-	t_list	*current;
-
-	if (sentinel == NULL)
-		return (FUNC_FAILUER);
-	current = sentinel->next;
-	while(current)
-	{
-		if (current->next == NULL || current->next->content == NULL)
-			break ;
-		if (((t_contents *)current->content)->num
-				> ((t_contents *)current->next->content)->num)
-			return (FUNC_SUCCESS);
-		current = current->next;
-	}
-	return (FUNC_FAILUER);
+	return (true);
 }
 
 int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
 	t_list			*sentinel;
-	unsigned int	min;
 	size_t			i;
 
 	if (stack_a == NULL || argv == NULL)
 		return (FUNC_FAILUER);
 	sentinel = stack_a;
-	min = 0;
 	i = 0;
 	while (i < (size_t)argc - 1)
 	{
@@ -125,7 +92,6 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 			return (fail_init_stack_a(sentinel, stack_a));
 		stack_a = stack_a->next;
 		sentinel->prev = stack_a;
-		set_min(((t_contents *)stack_a->content)->num, &min);
 	}
 	if (is_sorted(sentinel))
 		return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);

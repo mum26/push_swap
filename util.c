@@ -6,61 +6,58 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:35:05 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/30 21:54:59 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/01 18:22:49 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-unsigned int mapping(int n, int offset)
+int	is_duplicate(int n, t_list *sentinel)
 {
-	unsigned int	un;
-
-	un = (unsigned int)(n + offset);
-	return (un);
+	t_list	*current;
+	if (sentinel == NULL)
+		return (false);
+	current = sentinel->next;
+	while (current)
+	{
+		if (current->content == NULL)
+			break ;
+		if (((t_contents *)current->content)->num == n)
+			return (true);
+		current = current->next;
+	}
+	return (false);
 }
 
-//void	test(t_list *lst)
-//{
-//	t_list		*current;
-//	t_contents	*min;
-//
-//	min = (t_list *)lst->content;
-//	current = lst;
-//	while (current)
-//	{
-//		if (current->content == NULL)
-//			return ;
-//		if (min->num < ((t_list *)current->content)->num)
-//		{
-//			((t_list *)current->content)->map = min->num + 1;
-//			return ;
-//		}
-//		current = current->next;
-//	}
-//}
-
-char	*ulong_to_ternary(char *ternary, unsigned long ul)
+int	is_sorted(t_list *sentinel)
 {
-	int		len;
-	size_t	base_len;
+	t_list	*current;
 
-	if (ternary == NULL)
-		return (NULL);
-	len = INT_TERNARY_MAX_LEN - 1;
-	ternary[len--] = '\0';
-	base_len = ft_strlen(TER_DIGITS);
-	while (0 <= len)
+	if (sentinel == NULL)
+		return (false);
+	current = sentinel->next;
+	while(current)
 	{
-		if (0 < ul)
-		{
-			ternary[len--] = TER_DIGITS[ul % base_len];
-			ul /= base_len;
-		}
-		else
-			ternary[len--] = '0';
+		if (current->next == NULL || current->next->content == NULL)
+			break ;
+		if (((t_contents *)current->content)->num
+				> ((t_contents *)current->next->content)->num)
+			return (false);
+		current = current->next;
 	}
-	return (ternary);
+	return (true);
+}
+
+int	is_quoting(char *argv)
+{
+	size_t	n;
+	char	*p;
+
+	p = argv;
+	n = count_words(p, ' ');
+	if (0 < n)
+		return (true);
+	return (false);
 }
 
 char	*parse_sign(char *str, int *sign)
@@ -108,13 +105,3 @@ int	safe_atoi(int *n, char *str)
 	return (FUNC_SUCCESS);
 }
 
-void	set_min(int num, unsigned int *min)
-{
-	unsigned int	temp;
-
-	temp = 0;
-	if (num < 0)
-		temp = num * -1;
-	if (*min < temp)
-		*min = temp;
-}
