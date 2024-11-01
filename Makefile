@@ -9,6 +9,7 @@ SRCS     = push_swap.c \
 			die.c \
 			str_token.c \
 			print.c \
+			sort.c \
 			swap.c \
 			push.c \
 			rotate.c \

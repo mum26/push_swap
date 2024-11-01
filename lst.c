@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 17:59:28 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/01 21:38:14 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	make_lst(t_list **lst)
 	return (FUNC_SUCCESS);
 }
 
-void	make_stack_a(t_list **stack_a, int argc, char *argv[])
+void	make_stack_a(t_list **stack_a, int *argc, char *argv[])
 {
 	char	**strv;
 
@@ -34,13 +34,13 @@ void	make_stack_a(t_list **stack_a, int argc, char *argv[])
 		die("Error");
 	if (make_lst(stack_a))
 		die("Error");
-	if (argc == 2 && is_quoting(argv[0]))
+	if (*argc == 2 && is_quoting(argv[0]))
 	{
-		argc = str_token(&strv, argv[0], ' ');
+		*argc = str_token(&strv, argv[0], ' ');
 		if (argv == NULL)
 			die("Error");
 	}
-	if (init_stack_a(*stack_a, argc, strv))
+	if (init_stack_a(*stack_a, *argc, strv))
 	{
 		if (argv != strv)
 			cleanup(strv);
@@ -93,8 +93,8 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 		stack_a = stack_a->next;
 		sentinel->prev = stack_a;
 	}
-	if (is_sorted(sentinel))
-		return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
+//	if (is_sorted(sentinel))
+//		return (ft_lstclear(&sentinel, &free_contents), FUNC_FAILUER);
 	lstiter_num_to_ternary(sentinel);
 	return (FUNC_SUCCESS);
 }

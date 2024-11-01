@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 18:39:43 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/01 21:39:01 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ typedef struct s_contents
 }				t_contents;
 
 /* push_swap */
-//int		exec_sort(t_list **stack_a, t_list **stack_b);
+void		exec_sort(t_list **stack_a, t_list **stack_b, int argc);
 //int		cleaning_up(t_list **stack_a, t_list **stack_b);
 
 /* lst */
 int			make_lst(t_list **lst);
-void		make_stack_a(t_list **stack_a, int argc, char *argv[]);
+void		make_stack_a(t_list **stack_a, int *argc, char *argv[]);
 t_list		*make_node(t_list *sentinel, char *argv);
 int			fail_init_stack_a(t_list *sentinel, t_list *stack_a);
 int			init_stack_a(t_list *stack_a, int argc, char *argv[]);

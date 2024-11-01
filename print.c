@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:17:44 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 18:40:32 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/01 19:22:52 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ void		print_lst(char const *str, t_list *lst)
 
 	if (str == NULL || lst == NULL)
 		return ;
-	print_lst(str, lst);
 	current = lst->next;
 	while (current->content != NULL)
 	{
 		print_content(str, current);
 		current = current->next;
 	}
-	print_lst(str, current);
 }
 
 void	print_node(char const *str, t_list *node)
