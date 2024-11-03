@@ -45,12 +45,12 @@ static void	swap_head_and_second(t_list **lst, char *str)
 
 void	swap_a(t_list **stack_a)
 {
-	swap_head_and_second(stack_a, "sa");
+	swap_content((*stack_a)->next, (*stack_a)->next->next,"sa");
 }
 
 void	swap_b(t_list **stack_b)
 {
-	swap_head_and_second(stack_b, "sb");
+	swap_content((*stack_b)->next, (*stack_b)->next->next,"sb");
 }
 
 void	sa_and_sb(t_list **stack_a, t_list **stack_b)

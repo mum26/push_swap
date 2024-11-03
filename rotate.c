@@ -15,13 +15,22 @@
 static void rotate(t_list **lst, char *str)
 {
 	t_list	*head;
+	t_list	*next;
 	t_list	*tail;
 
 	head = (*lst)->next;
+	next = head->next;
 	tail = (*lst)->prev;
 	if (*lst == tail)
 		return ;
-	swap_content(head, tail, str);
+	(*lst)->prev = head;
+	(*lst)->next = next;
+	head->prev = tail;
+	head->next = (*lst);
+	next->prev = (*lst);
+	tail->next = head;
+	if (str)
+		ft_printf("%s\n", str);
 }
 
 void	rotate_a(t_list **stack_a)

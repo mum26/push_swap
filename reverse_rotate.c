@@ -15,13 +15,22 @@
 static void reverse_rotate(t_list **lst, char *str)
 {
 	t_list	*head;
+	t_list	*prev;
 	t_list	*tail;
 
 	head = (*lst)->next;
 	tail = (*lst)->prev;
+	prev = tail->prev;
 	if (*lst == tail)
 		return ;
-	swap_content(tail, head, str);
+	(*lst)->prev = prev;
+	(*lst)->next = tail;
+	head->prev = tail;
+	prev->next = *lst;
+	tail->prev = *lst;
+	tail->next = head;
+	if (str)
+		ft_printf("%s\n", str);
 }
 
 void	reverse_rotate_a(t_list **stack_a)
