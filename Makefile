@@ -13,7 +13,8 @@ SRCS     = push_swap.c \
 			swap.c \
 			push.c \
 			rotate.c \
-			reverse_rotate.c
+			reverse_rotate.c \
+			radix_sort.c
 OBJS     = $(SRCS:.c=.o)
 LIB_NAME = libft
 LIB_PATH = ./$(LIB_NAME)/$(LIB_NAME).a

@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:57:06 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/30 21:03:44 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 23:00:02 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void reverse_rotate(t_list **lst, char *str)
 
 	head = (*lst)->next;
 	tail = (*lst)->prev;
-	prev = tail->prev;
-	if (*lst == tail)
+	if ((*lst == tail) || (head == tail))
 		return ;
+	prev = tail->prev;
 	(*lst)->prev = prev;
 	(*lst)->next = tail;
 	head->prev = tail;

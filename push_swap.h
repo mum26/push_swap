@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 21:39:01 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 19:33:57 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 typedef struct s_contents
 {
-	char			*str;
 	int				num;
 	unsigned int	map;
 	char			*ternary;
@@ -45,7 +44,8 @@ int			init_stack_a(t_list *stack_a, int argc, char *argv[]);
 
 
 /* contents */
-int			lstiter_num_to_ternary(t_list *lst);
+char		*num_to_ternary(int n, size_t digit);
+int			lstiter_num_to_ternary(t_list *lst, int argc);
 void		free_contents(void *contents);
 t_contents	*make_contents(char *str, t_list *sentinel);
 
@@ -62,6 +62,11 @@ int			str_token(char ***dst, char const *str, char c);
 
 /* die */
 void		die(char *cause);
+
+/* sort */
+
+/* radix_sort */
+void	radix_sort(t_list **stack_a, t_list **stack_b, int argc);
 
 /* print */
 void		print_lst(char const *str, t_list *lst);

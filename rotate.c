@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:15:02 by sishige           #+#    #+#             */
-/*   Updated: 2024/10/30 20:56:53 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 22:49:03 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void rotate(t_list **lst, char *str)
 	t_list	*tail;
 
 	head = (*lst)->next;
-	next = head->next;
 	tail = (*lst)->prev;
-	if (*lst == tail)
+	if ((*lst == tail) || (head == tail))
 		return ;
+	next = head->next;
 	(*lst)->prev = head;
 	(*lst)->next = next;
 	head->prev = tail;

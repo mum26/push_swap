@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 21:38:34 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 18:10:34 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char *argv[])
 	print_lst("stack_b", stack_b);
 	ft_lstclear(&stack_b, &free_contents);
 // end
-
 	return (0);
 }
 

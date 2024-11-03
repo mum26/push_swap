@@ -6,65 +6,11 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 18:43:36 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 22:22:42 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 18:46:00 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	radix_sort(t_list **stack_a, t_list **stack_b, int argc)
-{
-	t_contents		*cont_a;
-	size_t		i;
-	size_t		j;
-	size_t		digit = get_num_of_digit_base(argc, 3) - 1;
-	int			zero;
-	int			one;
-	int			two;
-
-	cont_a = (t_contents *)(*stack_a)->next->content;
-	i = 0;
-	while (i < digit)
-	{
-		j = 0;
-		zero = 0;
-		one = 0;
-		two = 0;
-		while (j < (size_t)argc)
-		{
-			if (cont_a->ternary[i] == '0' || ft_strlen(cont_a->ternary) < i)
-			{
-				reverse_rotate_a(stack_a);
-				zero++;
-			}
-			else if (cont_a->ternary[i] == '1')
-			{
-				push_a(stack_a, stack_b);
-				one++;
-			}
-			else
-			{
-				push_a(stack_a, stack_b);
-				if (0 < two)
-					reverse_rotate_b(stack_b);
-				two++;
-			}
-			cont_a = (t_contents *)(*stack_a)->next->content;
-			j++;
-		}
-		while (two--)
-		{
-			if (0 < two)
-				rotate_b(stack_b);
-			push_b(stack_b, stack_b);
-		}
-		while (one--)
-			push_b(stack_b, stack_a);
-		while (zero--)
-			rotate_a(stack_a);
-		i++;
-	}
-}
 
 void	sort_three(t_list **lst)
 {

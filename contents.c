@@ -6,13 +6,35 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:45:37 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 18:41:11 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/03 19:38:39 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	lstiter_num_to_ternary(t_list *stack_a)
+char	*num_to_ternary(int n, size_t digit)
+{
+	char	*str;
+
+	str = (char *)ft_calloc(digit + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	str[digit] = '\0';
+	while (digit)
+	{
+		if (0 < n)
+		{
+			str[digit - 1] = TER_DIGITS[n % 3];
+			n /= 3;
+		}
+		else
+			str[digit - 1] = '0';
+		digit--;
+	}
+	return (str);
+}
+
+int	lstiter_num_to_ternary(t_list *stack_a, int argc)
 {
 	t_list	*current;
 	t_list	*lst;
@@ -34,7 +56,9 @@ int	lstiter_num_to_ternary(t_list *stack_a)
 			lst = lst->next;
 		}
 		((t_contents *)current->content)->map = cnt;
-		((t_contents *)current->content)->ternary = ft_ulltoa_base(cnt, TER_DIGITS);
+		((t_contents *)current->content)->ternary = 
+			num_to_ternary(((t_contents *)current->content)->map,
+			get_u_num_of_digit_base(argc, 3));
 		current = current->next;
 	}
 	return (FUNC_SUCCESS);
