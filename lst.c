@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/03 19:33:33 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/05 19:21:12 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,26 @@ int	fail_init_stack_a(t_list *sentinel, t_list *stack_a)
 
 int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 {
-	t_list			*sentinel;
+	t_list			*current;
+	t_list			*new_node;
+	t_list			*head;
 	size_t			i;
 
 	if (stack_a == NULL || argv == NULL)
 		return (FUNC_FAILUER);
-	sentinel = stack_a;
+	current = stack_a;
+	head = stack_a->next;
 	i = 0;
 	while (i < (size_t)argc - 1)
 	{
-		stack_a->next = make_node(sentinel, argv[i++]);
-		if (stack_a->next == NULL)
-			return (fail_init_stack_a(sentinel, stack_a));
-		stack_a = stack_a->next;
-		sentinel->prev = stack_a;
+		new_node = make_node(stack_a, argv[i++]);
+		if (new_node == NULL)
+			return (fail_init_stack_a(stack_a, current));
+		current->next = new_node;
+		head->prev = new_node;
+		current = current->next;
 	}
-	lstiter_num_to_ternary(sentinel, argc - 1);
+	lstiter_num_to_ternary(stack_a, argc - 1);
 	return (FUNC_SUCCESS);
 }
 
