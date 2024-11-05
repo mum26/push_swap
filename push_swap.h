@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/03 19:33:57 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/05 19:49:40 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void		die(char *cause);
 void	radix_sort(t_list **stack_a, t_list **stack_b, int argc);
 
 /* print */
-void		print_lst(char const *str, t_list *lst);
-void		print_node(char const *str, t_list *node);
+void		print_lst(char const *str, t_list **lst);
+void		print_node(char const *str, t_list **node);
 void		print_content(char const *str, t_list *node);
 
 /* COMMAND */
