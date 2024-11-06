@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:17:44 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/05 19:59:04 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/06 18:54:18 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,13 @@ void	print_node(char const *str, t_list **node)
 void	print_content(char const *str, t_list *lst)
 {
 	t_contents	*c;
+	(void)str;
 
 	c = (t_contents *)lst->content;
 	if (c == NULL)
-	{
-		printf("[%s] sentinel\n", str);
 		return ;
-	}
-	printf("[%s] num: %d, map: %u, ternary: %s\n", "c", c->num, c->map,
-		c->ternary);
+	printf("[%s] num: %d, map: %u, ternary: %s\n",
+			"c", c->num, c->map, c->ternary);
 }
 
 // void		print_lst(char const *str, t_list **lst)

@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:33:58 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/03 18:10:34 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/06 20:38:22 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,44 @@ int	main(int argc, char *argv[])
 /* EXEC SORT */
 // start
 	exec_sort(&stack_a, &stack_b, argc);
+//	push_a(&stack_a, &stack_b);
+//	if (!lst_checker(&stack_a))
+//		return (printf("NG"));
+//	if (!lst_checker(&stack_b))
+//		return (printf("NG"));
+//
+//	reverse_rotate_a(&stack_a);
+//	if (!lst_checker(&stack_a))
+//		return (printf("NG"));
+//	if (!lst_checker(&stack_b))
+//		return (printf("NG"));
+//
+//	push_a(&stack_a, &stack_b);
+//	if (!lst_checker(&stack_a))
+//		return (printf("NG"));
+//	if (!lst_checker(&stack_b))
+//		return (printf("NG"));
+//
+//	reverse_rotate_b(&stack_b);
+//	if (!lst_checker(&stack_a))
+//		return (printf("NG"));
+//	if (!lst_checker(&stack_b))
+//		return (printf("NG"));
+
 // end
 
-/* CLEANING UP */
 // start
 // end
 
 /* DEBUG */
 // start
-	print_lst("stack_a", stack_a);
+//	print_lst("stack_a", &stack_a);
+//	print_lst("stack_b", &stack_b);
+//	if (is_sorted(stack_a))
+//		printf("OK");
+//	else
+//		printf("NG");
 	ft_lstclear(&stack_a, &free_contents);
-	print_lst("stack_b", stack_b);
 	ft_lstclear(&stack_b, &free_contents);
 // end
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:04:01 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/05 16:19:51 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/06 19:02:22 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	push_left_to_right(t_list **left, t_list **right, char *str)
 	lst[R]->next = head[L];
 	head[L]->prev = lst[R];
 	head[L]->next = head[R];
+	head[R]->prev = head[L];
 	if (tail[R] == lst[R])
 		lst[R]->prev = head[L];
 
