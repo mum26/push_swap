@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:04:01 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/06 19:02:22 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/07 16:27:20 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static void	push_left_to_right(t_list **left, t_list **right, char *str)
 		ft_printf("%s\n", str);
 }
 
-void	push_a(t_list **stack_a, t_list **stack_b)
+void	push_b(t_list **stack_a, t_list **stack_b)
 {
-	push_left_to_right(stack_a, stack_b, "pa");
+	push_left_to_right(stack_a, stack_b, "pb");
 }
 
-void	push_b(t_list **stack_b, t_list **stack_a)
+void	push_a(t_list **stack_b, t_list **stack_a)
 {
-	push_left_to_right(stack_b, stack_a, "pb");
+	push_left_to_right(stack_b, stack_a, "pa");
 }
