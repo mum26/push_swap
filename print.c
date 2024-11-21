@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:17:44 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/06 18:54:18 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:03:33 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_lst(char const *str, t_list **lst)
 	do
 	{
 		// ノードのアドレスを参照するために &current を渡す
-		print_node(str, &current);
+//		print_node(str, &current);
 		print_content(str, current);
 		current = current->next;
 	} while (current != *lst); // 開始ノードに戻ったら終了
@@ -44,8 +44,8 @@ void	print_content(char const *str, t_list *lst)
 	c = (t_contents *)lst->content;
 	if (c == NULL)
 		return ;
-	printf("[%s] num: %d, map: %u, ternary: %s\n",
-			"c", c->num, c->map, c->ternary);
+	printf("[%s] num: %d, map: %u, digits: %s\n",
+			"c", c->num, c->map, c->digits_str);
 }
 
 // void		print_lst(char const *str, t_list **lst)
