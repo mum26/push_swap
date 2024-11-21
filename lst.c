@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:46:04 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/05 19:21:12 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:05:55 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int	init_stack_a(t_list *stack_a, int argc, char *argv[])
 		head->prev = new_node;
 		current = current->next;
 	}
-	lstiter_num_to_ternary(stack_a, argc - 1);
+	if (is_odd_in_ternary(argc - 1))
+		lstiter_num_to_quaternary(stack_a, argc - 1);
+	else
+		lstiter_num_to_ternary(stack_a, argc - 1);
 	return (FUNC_SUCCESS);
 }
 
