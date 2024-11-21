@@ -6,7 +6,7 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:10:13 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/06 20:04:30 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:01:35 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # define TER_DIGITS "012"
+# define QUA_DIGITS "0123"
 
 # define FUNC_SUCCESS 0
 # define FUNC_FAILUER 1
@@ -28,7 +29,7 @@ typedef struct s_contents
 {
 	int				num;
 	unsigned int	map;
-	char			*ternary;
+	char			*digits_str;
 }				t_contents;
 
 /* push_swap */
@@ -46,10 +47,13 @@ int			init_stack_a(t_list *stack_a, int argc, char *argv[]);
 /* contents */
 char		*num_to_ternary(int n, size_t digit);
 int			lstiter_num_to_ternary(t_list *lst, int argc);
+char		*num_to_quaternary(int n, size_t digit);
+int			lstiter_num_to_quaternary(t_list *lst, int argc);
 void		free_contents(void *contents);
 t_contents	*make_contents(char *str, t_list *sentinel);
 
 /* util */
+int			is_odd_in_ternary(int num);
 int			is_duplicate(int n, t_list *sentinel);
 int			is_quoting(char *argv);
 int			is_sorted(t_list *sentinel);
