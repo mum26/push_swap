@@ -6,11 +6,21 @@
 /*   By: sishige <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:35:05 by sishige           #+#    #+#             */
-/*   Updated: 2024/11/01 18:22:49 by sishige          ###   ########.fr       */
+/*   Updated: 2024/11/21 17:59:14 by sishige          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_odd_in_ternary(int num)
+{
+	int	ternary_digit;
+	int	remainder;
+
+	ternary_digit = get_u_num_of_digit_base(num, 3);
+	remainder = ternary_digit % 2;
+	return (remainder);
+}
 
 int	is_duplicate(int n, t_list *sentinel)
 {
